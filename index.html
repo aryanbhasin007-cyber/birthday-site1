@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fce4ec;
+            text-align: center;
+            padding: 50px;
+        }
+        section {
+            display: none;
+        }
+        section.active {
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ec407a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #d81b60;
+        }
+        img {
+            width: 250px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" src="blue.mp3"></audio>
+
+    <section id="page1" class="active">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+        <p>Welcome to your special surprise page!</p>
+        <img src="https://i.imgur.com/1Q9Z1Zm.jpeg" alt="Birthday Cake">
+        <br><br>
+        <button onclick="startMusicAndNext()">Next 🎁</button>
+    </section>
+
+    <section id="page2">
+        <h1>💖 Wishing You Joy 💖</h1>
+        <p>May your year be filled with love, laughter, and endless happiness!</p>
+        <img src="https://i.imgur.com/oYiTqum.jpeg" alt="Celebration">
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            launchConfetti();
+        }
+
+        function launchConfetti() {
+            let duration = 3 * 1000; 
+            let end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 6, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+
+        function startMusicAndNext() {
+            let music = document.getElementById('bg-music');
+            music.volume = 1.0;
+            music.play();
+            showPage('page2');
+        }
+
+        window.onload = launchConfetti;
+    </script>
+</body>
+</html>
