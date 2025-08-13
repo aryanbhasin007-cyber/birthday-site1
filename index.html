@@ -41,7 +41,7 @@
 </head>
 <body>
 
-<audio id="bg-music" src="Blue_Yung_Kai.mp3" autoplay loop></audio>
+<audio id="bg-music" src="Blue_Yung_Kai.mp3" loop></audio>
 
 <section id="page1" class="active">
     <h1>🎉 Happy Birthday! 🎉</h1>
@@ -65,9 +65,9 @@ function goToPage(pageId) {
     document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
     launchConfetti();
+    document.getElementById('bg-music').play();
 }
 
-// Confetti animation
 function launchConfetti() {
     let duration = 3 * 1000; // 3 seconds
     let end = Date.now() + duration;
@@ -92,18 +92,8 @@ function launchConfetti() {
     }());
 }
 
-// Try to auto-play music even if blocked
-window.onload = function() {
-    launchConfetti();
-    let music = document.getElementById('bg-music');
-    music.volume = 1.0; // full volume
-    music.play().catch(() => {
-        // If autoplay is blocked, start on first click
-        document.body.addEventListener('click', () => {
-            music.play();
-        }, { once: true });
-    });
-};
+// First confetti on page load
+window.onload = launchConfetti;
 </script>
 
 </body>
