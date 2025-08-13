@@ -98,36 +98,4 @@ function startMusicAndNext() {
 </script>
 
 </body>
-</html>    let duration = 3 * 1000;
-    let end = Date.now() + duration;
-
-    (function frame() {
-        confetti({
-            particleCount: 6,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 }
-        });
-        confetti({
-            particleCount: 6,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 }
-        });
-
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    }());
-}
-
-function startMusicAndNext() {
-    let music = document.getElementById("bg-music");
-    music.volume = 1.0;
-    music.play();
-    showPage('page2');
-}
-</script>
-
-</body>
-</html>
+</html>    
